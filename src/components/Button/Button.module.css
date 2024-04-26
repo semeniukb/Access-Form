@@ -1,0 +1,39 @@
+.button {
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 32px;
+    padding: 16px 32px 16px 32px;
+    transition: all 200ms ease;
+    width: 100%;
+
+}
+
+.contained {
+    height: 56px;
+    background-color: var(--background-brand);
+    border: var(--background-brand);
+    color: var(--text-invert);
+
+    &:hover {
+        border-color: var(--background-hover-primary);
+        background-color: var(--background-hover-primary);
+    }
+
+    &:focus {
+        border: 1px solid;
+        border-color: var(--background-brand-extraLight);
+    }
+
+    &:disabled:not(.loading) {
+        border-color: var(--background-brand-extraLight);
+        background-color: var(--background-brand-extraLight);
+    }
+}
+
+.outlined {
+    height: 56px;
+    padding: 16px 32px 16px 32px;
+    background-color: var(--background-primary);
+    border: var(--background-primary);
+
+}
