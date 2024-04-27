@@ -31,3 +31,22 @@ interface BaseResponse {
   success: boolean;
   reason?: string;
 }
+
+interface SignInDto {
+  phone: string;
+  code: number;
+}
+
+interface User {
+  phone: string;
+  firstname?: string;
+  middlename?: string;
+  lastname?: string;
+  email?: string;
+  city?: string;
+}
+
+interface SignInResponse extends BaseResponse {
+  user: User;
+  token: string;
+}
