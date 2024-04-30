@@ -13,7 +13,7 @@ export const useView = () => {
   }>({});
 
   const authForm = useForm<OtpScheme | PhoneScheme>({
-    mode: "onBlur",
+    mode: "onChange",
     defaultValues: {
       phone: "",
     },
@@ -35,15 +35,17 @@ export const useView = () => {
   const postAuthOptMutation = usePostAuthOtpMutation();
   const postUsersSinginMutation = usePostUsersSinginMutation();
 
+  const onSendPhone = async (phone: string) => {
+    const postAuthOptMutationResponse = await postAuthOptMutation.mutateAsync({ params: { phone } });
+
+    setSubmittedPhones({
+      ...submittedPhones,
+      [phone]: Date.now() + postAuthOptMutationResponse.data.retryDelay,
+    });
+  };
   const onSubmit = authForm.handleSubmit(async values => {
     if (stage === "phone" && "phone" in values) {
-      const postAuthOptMutationResponse = await postAuthOptMutation.mutateAsync({ params: values });
-
-      setSubmittedPhones({
-        ...setSubmittedPhones,
-        [phone]: Date.now() + postAuthOptMutationResponse.data.retryDelay,
-      });
-
+      await onSendPhone(values.phone);
       setStage("otp");
       return;
     }
@@ -59,9 +61,10 @@ export const useView = () => {
     }
   });
 
+  const onRetryDelete = () => onSendPhone(phone);
   return {
     form: authForm,
-    state: { isLoading: authForm.formState.isSubmitting, stage },
-    functions: { onSubmit },
+    state: { isLoading: authForm.formState.isSubmitting, stage, submittedPhones, phone },
+    functions: { onSubmit, onRetryDelete },
   };
 };

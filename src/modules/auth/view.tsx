@@ -1,4 +1,4 @@
-import { Typography, Input, Button } from "@/components";
+import { Typography, Input, Button, Countdown } from "@/components";
 import { useView } from "@/modules/auth/hooks/useView.tsx";
 import styles from "./view.module.css";
 import { Controller } from "react-hook-form";
@@ -7,7 +7,7 @@ import { LENGTH } from "@/modules/auth/constants/sizes.ts";
 
 export const AuthView = () => {
   const { state, functions, form } = useView();
-
+  console.log("RENDER AuthView");
   return (
     <form className={styles.container} onSubmit={functions.onSubmit}>
       <Typography tag="p" variant="paragraph16_regular">
@@ -32,6 +32,7 @@ export const AuthView = () => {
 
       {state.stage === "otp" && (
         <Input
+          type="number"
           maxLength={LENGTH.OTP}
           placeholder="Проверочный код"
           {...form.register("otp")}
@@ -43,6 +44,9 @@ export const AuthView = () => {
       <Button variant="contained" type="submit" loading={state.isLoading}>
         Войти
       </Button>
+      {state.stage === "otp" && state.submittedPhones[state.phone] && (
+        <Countdown onRetryDelete={functions.onRetryDelete} retryDelay={state.submittedPhones[state.phone]} />
+      )}
     </form>
   );
 };

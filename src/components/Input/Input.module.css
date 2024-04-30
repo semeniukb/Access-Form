@@ -29,3 +29,8 @@
     line-height: 20px;
     color: var(--indicator-error);
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
