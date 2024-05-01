@@ -8,7 +8,7 @@ import { Countdown } from "@/modules/auth/components";
 
 export const AuthView = () => {
   const { state, functions, form } = useView();
-  console.log("RENDER AuthView");
+
   return (
     <form className={styles.container} onSubmit={functions.onSubmit}>
       <Typography tag="h2" variant="title">
