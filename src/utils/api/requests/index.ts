@@ -6,6 +6,8 @@ import {
   SessionResponse,
   SignInDto,
   SignInResponse,
+  UpdateProfileDto,
+  UpdateProfileResponse,
 } from "../../../../@types/api";
 
 type PostAuthOtpParams = CreateOtpDto;
@@ -21,3 +23,8 @@ export const postUsersSignIn = ({ params, config }: PostUsersSignInRequestConfig
 export type GetUserSessionRequestConfig = RequestConfig | void;
 export const getUserSession = (requestConfig: GetUserSessionRequestConfig) =>
   api.get<SessionResponse>("users/session", requestConfig?.config);
+
+type PatchUserProfileParams = UpdateProfileDto;
+export type PatchUserProfileRequestConfig = RequestConfig<PatchUserProfileParams>;
+export const patchUserProfile = ({ params, config }: PatchUserProfileRequestConfig) =>
+  api.patch<UpdateProfileResponse>("users/profile", params, config);

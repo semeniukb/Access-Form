@@ -37,6 +37,13 @@ interface SignInDto {
   code: number;
 }
 
+type UpdateProfileProfileDto = Omit<User, "phone">;
+
+interface UpdateProfileDto {
+  phone: string;
+  profile: UpdateProfileProfileDto;
+}
+
 interface User {
   phone: string;
   firstname?: string;
@@ -52,5 +59,9 @@ interface SignInResponse extends BaseResponse {
 }
 
 interface SessionResponse extends BaseResponse {
+  user: User;
+}
+
+interface UpdateProfileResponse extends BaseResponse {
   user: User;
 }

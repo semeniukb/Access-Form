@@ -11,6 +11,9 @@ export const AuthView = () => {
   console.log("RENDER AuthView");
   return (
     <form className={styles.container} onSubmit={functions.onSubmit}>
+      <Typography tag="h2" variant="title">
+        Вход
+      </Typography>
       <Typography tag="p" variant="paragraph16_regular">
         Введите {state.stage === "phone" ? "номер телефона" : "проверочный код"} для входа
         <br /> в личный кабинет

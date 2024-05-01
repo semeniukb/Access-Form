@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 850px;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.fieldset {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+@media (max-width: 850px) {
+    .fieldset {
+        grid-template-columns: 1fr;
+    }
+}
+
+.buttons_box {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 20%;
+}
