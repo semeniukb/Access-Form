@@ -5,6 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { usePostAuthOtpMutation, usePostUsersSinginMutation } from "@/utils/api";
 import { OtpScheme, otpScheme } from "@/modules/auth/constants/SchemeOTP.tsx";
 import { PhoneScheme, phoneScheme } from "@/modules/auth/constants/SchemePhone.tsx";
+import { useSessionStore } from "@/utils/store";
+import { LOCAL_STORAGE_KEYS } from "@/utils/constants";
 
 export const useView = () => {
   const [stage, setStage] = React.useState<"phone" | "otp">("phone");
@@ -58,6 +60,8 @@ export const useView = () => {
       if (!postUsersSinginMutationResponse.data.success) {
         authForm.setError("otp", { message: postUsersSinginMutationResponse.data.reason });
       }
+      useSessionStore.setState({ isLoggedIn: true, user: postUsersSinginMutationResponse.data.user });
+      localStorage.setItem(LOCAL_STORAGE_KEYS.TOKEN, postUsersSinginMutationResponse.data.token);
     }
   });
 

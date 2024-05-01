@@ -50,3 +50,7 @@ interface SignInResponse extends BaseResponse {
   user: User;
   token: string;
 }
+
+interface SessionResponse extends BaseResponse {
+  user: User;
+}

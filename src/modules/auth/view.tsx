@@ -1,9 +1,10 @@
-import { Typography, Input, Button, Countdown } from "@/components";
+import { Typography, Input, Button } from "@/components";
 import { useView } from "@/modules/auth/hooks/useView.tsx";
 import styles from "./view.module.css";
 import { Controller } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 import { LENGTH } from "@/modules/auth/constants/sizes.ts";
+import { Countdown } from "@/modules/auth/components";
 
 export const AuthView = () => {
   const { state, functions, form } = useView();
