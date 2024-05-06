@@ -10,10 +10,11 @@ type InputProps<Component extends keyof JSX.IntrinsicElements | React.JSXElement
 
 export const Input = forwardRef(
   (
-    { label, component, className, error, ...props }: InputProps<"input">,
+    { label, component, className, error, id: externalId, ...props }: InputProps<"input">,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
-    const id = useId();
+    const internalId = useId();
+    const id = externalId ?? internalId;
     const Component = component || "input";
 
     return (
